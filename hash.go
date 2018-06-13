@@ -11,10 +11,6 @@ import (
 
 )
 
-const (
-	APP_NAME				= "gowdl"
-)
-
 
 func GenerateRandomHex(length int) (string, error) {
 
@@ -102,5 +98,7 @@ func GenerateToken(key string, length int) (string, error) {
 	
 	}
 
-
 } // GenerateToken
+
+
+
