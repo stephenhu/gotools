@@ -20,7 +20,7 @@ func GenerateRandomHex(length int) (string, error) {
 
 	if length < 1 {
 		return "", errors.New(fmt.Sprintf(
-			"%s(): GenerateRandomHex: length cannot be less than 1", APP_NAME))
+			"%s GenerateRandomHex(): length cannot be less than 1", APP_NAME))
 	}
 	
 	buf := make([]byte, length)
@@ -36,27 +36,46 @@ func GenerateRandomHex(length int) (string, error) {
 } // GenerateRandomHex
 
 
+func GenerateHash(s string, salt string, hk string, p string,
+	length int) (string, error) {
+
+		if s == "" || hk == "" || p == "" || salt == "" {
+			return "", errors.New(fmt.Sprintf(
+				"%s GenerateHash(): empty string not allowed", APP_NAME))
+		}
+	
+		digest 	:= hmac.New(sha256.New, []byte(hk))
+		
+		digest.Write([]byte(s + salt + p))
+	
+		hash := hex.EncodeToString(digest.Sum(nil))
+		
+		return hash[:length], nil
+	
+} // GenerateHash
+
+
 func GenerateHashAndSalt(s string, hk string, p string, length int) (
 	string, string, error) {
 
 	if s == "" || hk == "" || p == "" {
 		return "", "", errors.New(fmt.Sprintf(
-			"%s(): GenerateHashAndSalt: empty string not allowed", APP_NAME))
+			"%s GenerateHashAndSalt(): empty string not allowed", APP_NAME))
 	}
 
-	digest 	:= hmac.New(sha256.New, []byte(hk))
-	
 	salt, err := GenerateRandomHex(length)
 
 	if err != nil {
 		return "", "", err
 	} else {
 
-		digest.Write([]byte(s + salt + p))
+		hash, err := GenerateHash(s, salt, hk, p, length)
 
-		hash := hex.EncodeToString(digest.Sum(nil))
-	
-		return hash[:length], salt, nil
+		if err != nil {
+			return "", "", err
+		} else {
+			return hash, salt, nil
+		}
 
 	}
 

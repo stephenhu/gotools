@@ -4,6 +4,7 @@ import(
 	"testing"
 )
 
+
 func TestGenerateHex(t *testing.T) {
 
 	_, err := GenerateRandomHex(32)
@@ -13,6 +14,7 @@ func TestGenerateHex(t *testing.T) {
 	}
 
 } // TestGenerateHex
+
 
 func TestGenerateHexInvalidLength(t *testing.T) {
 
@@ -24,6 +26,29 @@ func TestGenerateHexInvalidLength(t *testing.T) {
 
 } // TestGenerateHexInvalidLength
 
+
+func TestGenerateHash(t *testing.T) {
+
+	_, err := GenerateHash("abc", "opq", "xyz", "123", 32)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+} // TestGenerateHash
+
+
+func TestGenerateHashInvalidS(t *testing.T) {
+
+	_, err := GenerateHash("", "opq", "xyz", "123", 32)
+
+	if err == nil {
+		t.Error(err)
+	}
+
+} // TestGenerateHashInvalidS
+
+
 func TestGenerateHashAndSalt(t *testing.T) {
 
 	_, _, err := GenerateHashAndSalt("abc", "xyz", "123", 32)
@@ -33,6 +58,7 @@ func TestGenerateHashAndSalt(t *testing.T) {
 	}
 
 } // TestGenerateHashAndSalt
+
 
 func TestGenerateHashAndSaltInvalidLength(t *testing.T) {
 
@@ -44,6 +70,7 @@ func TestGenerateHashAndSaltInvalidLength(t *testing.T) {
 
 } // TestGenerateHashAndSaltInvalidLength
 
+
 func TestGenerateHashAndSaltInvalidS(t *testing.T) {
 
 	_, _, err := GenerateHashAndSalt("", "xyz", "123", 32)
@@ -54,6 +81,7 @@ func TestGenerateHashAndSaltInvalidS(t *testing.T) {
 
 } // TestGenerateHashAndSaltInvalidS
 
+
 func TestGenerateHashAndSaltInvalidHK(t *testing.T) {
 
 	_, _, err := GenerateHashAndSalt("abc", "", "123", 32)
@@ -63,6 +91,7 @@ func TestGenerateHashAndSaltInvalidHK(t *testing.T) {
 	}
 
 } // TestGenerateHashAndSaltInvalidHK
+
 
 func TestGenerateHashAndSaltInvalidP(t *testing.T) {
 
