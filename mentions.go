@@ -7,11 +7,12 @@ import (
 )
 
 const (
-	MENTION_AT				= "@"
+	MENTION_AT							= "@"
+	USERNAME_MAX_LENGTH			= 25
 )
 
 const (
-	USERNAME_REGEXP		= "@[a-z][a-z0-9_]{1,24}"
+	USERNAME_REGEXP		= "@[a-z][a-z0-9_]{1,23}"
 	USERNAME_INVALID  = "+,?-.@$%^&*#!"
 )
 
@@ -33,7 +34,7 @@ func ExtractMentions(s string) []string {
 
 			if t[0] == MENTION_AT[0] {
 	
-				if len(t) < 25 {
+				if len(t) < USERNAME_MAX_LENGTH {
 				
 					r, err := regexp.Compile(USERNAME_REGEXP)
 
