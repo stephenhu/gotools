@@ -103,3 +103,24 @@ func TestGenerateHashAndSaltInvalidP(t *testing.T) {
 
 } // TestGenerateHashAndSaltInvalidP
 
+
+func TestGenerateSimpleHash(t *testing.T) {
+
+	_, err := GenerateSimpleHash("abc", 32)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+} // TestGenerateSimpleHash
+
+
+func TestGenerateSimpleHashInvalidLength(t *testing.T) {
+
+	_, err := GenerateSimpleHash("abc", -2)
+
+	if err == nil {
+		t.Error(err)
+	}
+
+} // TestGenerateSimpleHashInvalidLength
