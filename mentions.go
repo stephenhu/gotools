@@ -25,7 +25,7 @@ func ExtractMentions(s string) []string {
 		return mentions
 	} else {
 
-		tokens := strings.Split(s, " ")
+		tokens := strings.Fields(s)
 
 		for _, token := range tokens {
 

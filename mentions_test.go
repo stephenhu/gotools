@@ -10,6 +10,8 @@ var validMentions = []string{
   "@abc_xyz",
 	"@go123",
 	"@abcdefghijklmn",
+	"go back to saudi mother fucking arabs @clips @hababi",
+	"go @haha  best",
 }
 
 var invalidMentions = []string{

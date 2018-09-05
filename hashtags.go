@@ -25,13 +25,13 @@ func ExtractHashtags(s string) []string {
 		return hashtags
 	} else {
 
-		tokens := strings.Split(s, " ")
+		tokens := strings.Fields(s)
 
 		for _, token := range tokens {
 
 			t := strings.TrimSpace(token)
 
-
+			log.Println(t)
 			if t[0] == HASHTAG_POUND[0] {
 	
 				if len(t) < HASHTAG_MAX_LENGTH {

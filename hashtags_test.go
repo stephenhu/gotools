@@ -1,6 +1,7 @@
 package gowdl
 
 import (
+	"log"
 	"testing"
 
 )
@@ -11,6 +12,7 @@ var validHashtags = []string{
 	"#go123",
 	"#abcdefghijklmn",
 	"#23623",
+	"#me  too",
 }
 
 var invalidHashtags = []string{
@@ -27,6 +29,7 @@ func TestExtractHashtagsValid(t *testing.T) {
 
 		hashtags := ExtractHashtags(m)
 	
+		log.Println(hashtags)
 		if len(hashtags) == 0 {
 			t.Error(hashtags)
 		}
